@@ -135,7 +135,7 @@ const UpdatePost = () => {
                 </div>
                 <div className="flex space-x-4">
                     <button
-                        onClick={() => window.location.href = '/profile'}
+                        onClick={() => navigate('/profile')}
                         className="py-2 px-4 rounded-md text-sm font-bold text-white bg-green-500 hover:bg-green-600 transition-colors"
                     >
                         Back to Profile
