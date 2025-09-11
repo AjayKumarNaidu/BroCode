@@ -10,7 +10,11 @@ const app = express();
 dotenv.config();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: ["https://your-frontend.onrender.com","http://localhost:5173"], // frontend URL
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 app.use('/api/user',UserRoutes);
 app.use('/api/posts',PostRoutes);
@@ -27,9 +31,6 @@ mongoose.connect(process.env.MONGO_URI)
 app.listen(PORT,()=>{
   console.log(`app is running on server ${PORT}`);
 })
-
-//mongodb+srv://iajaykumar3377:ajaykumar@cluster0.csiveck.mongodb.net/
-
 
 //react toastify. /
 //adding confirm password in register page. /
