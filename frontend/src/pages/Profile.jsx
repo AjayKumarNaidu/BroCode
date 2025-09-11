@@ -319,7 +319,12 @@ const Profile = () => {
                       </div>
                       <div className='flex gap-2'>
                         {post.isApproved ? <div>Posted</div> : <div>Admin is Reviewing</div> }
-                        <div className={`py-1 px-4 rounded-full text-white font-bold text-sm ${post.verdict === "Selected" ? "bg-green-500" : post.verdict === "Not Selected" ? "bg-red-500" : "bg-blue-500"}`}>
+                        <div className={`py-1 px-4 rounded-full text-white font-bold text-xs sm:text-sm md:text-base text-center break-words max-w-[150px] 
+                          ${post.verdict === "Selected"
+                            ? "bg-green-500"
+                            : post.verdict === "Not Selected"
+                              ? "bg-red-500"
+                              : "bg-blue-500"}`}>
                           {post.verdict}
                         </div>
                       </div>
@@ -333,15 +338,20 @@ const Profile = () => {
                         {/* Likes section */}
                         <div className="flex items-center space-x-1 text-gray-600 cursor-pointer">
                           <HeartIcon isLiked={post.likes.includes(currentUser)} />
-                          <span>{post.likes.length} Likes</span>
+                          <span>{post.likes.length}</span>
+                          <span className="hidden sm:inline">Likes</span>
                         </div>
+
                         {/* Comments section */}
-                        <div className="flex items-center space-x-1 text-gray-600 cursor-pointer" onClick={() => toggleComments(post._id)}>
+                        <div
+                          className="flex items-center space-x-1 text-gray-600 cursor-pointer"
+                          onClick={() => toggleComments(post._id)}
+                        >
                           <CommentIcon />
-                          <span>{post.comments.length} Comments</span>
+                          <span>{post.comments.length}</span>
+                          <span className="hidden sm:inline">Comments</span>
                         </div>
                       </div>
-
                       {/* Action Buttons */}
                       <div className="flex space-x-2">
                         <button
