@@ -318,7 +318,7 @@ const Profile = () => {
                         <p className="text-sm text-gray-500 mt-1">Applied: {post.appliedOn}</p>
                       </div>
                       <div className='flex gap-2'>
-                        {post.isApproved ? <div>Posted</div> : <div>Admin is Reviewing</div> }
+                        {post.isApproved ? <div>Posted</div> : <div>Reviewing</div> }
                         <div className={`py-1 px-4 rounded-full text-white font-bold text-xs sm:text-sm md:text-base text-center break-words max-w-[150px] 
                           ${post.verdict === "Selected"
                             ? "bg-green-500"
