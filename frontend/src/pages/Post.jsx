@@ -18,7 +18,7 @@ const ShareIcon = () => (
 
 const Post = () => {
     //common fields
-    const URI = "http://localhost:5000";
+    const URI = "https://brocode-t04c.onrender.com";
 
     const navigate = useNavigate();
 

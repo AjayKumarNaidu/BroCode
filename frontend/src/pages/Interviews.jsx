@@ -25,7 +25,7 @@ const getUniqueCompanies = (data) => [...new Set(data.map(item => item.companyNa
 const Interviews = () => {
 
   //common fields
-  const URI = 'http://localhost:5000'
+  const URI = 'https://brocode-t04c.onrender.com'
 
   const navigate = useNavigate();
 
