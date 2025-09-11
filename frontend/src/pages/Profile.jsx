@@ -48,7 +48,6 @@ const Profile = () => {
       const token = localStorage.getItem("token");
       if (token) {
         const decoded = jwtDecode(token);
-        console.log(decoded.email); // 👉 email from payload
         setCurrentUser(decoded.email);
       }
 
@@ -56,7 +55,6 @@ const Profile = () => {
         try {
           const newdata = await axios.get(`${URI}/api/user/user/${currentUser}`);
           if(newdata.data.success){
-            console.log(newdata.data.message);
             setUserData(newdata.data.message);
           }
           console.log(userData)
@@ -100,7 +98,6 @@ const Profile = () => {
       try {
         const newdata = await axios.delete(`${URI}/api/posts/delete/${postToDelete}`);
         if(newdata.data.success){
-          console.log(newdata.data.message);
           const updatedPosts = postsData.filter(post => post._id !== postToDelete);
           setPostsData(updatedPosts);
           setPostToDelete(null);
@@ -152,7 +149,6 @@ const Profile = () => {
     try {
       const newdata = await axios.put(`${URI}/api/user/linkedUrl/${userData._id}`,{linkedUrl:newLinkedinUrl});
       if(newdata.data.success){
-        console.log(`Saving new LinkedIn URL: ${newLinkedinUrl}`);
         setUserData(prevState => ({ ...prevState, linkedUrl: newLinkedinUrl }));
         setNewLinkedinUrl('');
       }

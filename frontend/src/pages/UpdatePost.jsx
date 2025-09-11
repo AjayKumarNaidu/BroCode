@@ -112,7 +112,6 @@ const UpdatePost = () => {
         try {
           const updatedData = { ...postData, isApproved: false }; // force isApproved = false
           const newdata = await axios.put(`${URI}/api/posts/update/${id}`,updatedData);
-          console.log(newdata);
           if(newdata.data.success){
             console.log("updated successfully , Updated Post Data:", postData);
             toast.success('Post Updated!');

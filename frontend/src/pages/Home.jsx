@@ -31,7 +31,6 @@ const Home = () => {
         } else {
           setAuthorized(false)
         }
-        console.log("Admin data:", res.data);
       } catch (err) {
         setAuthorized(false);
         console.log("Error:", err.message);

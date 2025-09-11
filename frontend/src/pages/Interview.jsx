@@ -66,7 +66,6 @@ const Interview = () => {
     const token = localStorage.getItem("token");
     if (token) {
       const decoded = jwtDecode(token);
-      console.log(decoded.email); // 👉 email from payload
       setCurrentUser(decoded.email);
     }
 
@@ -74,7 +73,6 @@ const Interview = () => {
       try {
         const newdata = await axios.get(`${URI}/api/user/user/${currentUser}`);
         if (newdata.data.success) {
-          console.log(newdata.data.message);
           setCurrentUserData(newdata.data.message);
         }
       } catch (error) {
@@ -169,7 +167,6 @@ const Interview = () => {
     try {
       const newdata = await axios.get(`${URI}/api/posts/getPost/${id}`);
       if (newdata.data.success) {
-        console.log(newdata.data.message)
         setPost(newdata.data.message)
       }
     } catch (error) {

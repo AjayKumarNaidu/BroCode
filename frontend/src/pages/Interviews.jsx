@@ -39,7 +39,6 @@ const Interviews = () => {
     const token = localStorage.getItem("token");
     if (token) {
       const decoded = jwtDecode(token);
-      console.log(decoded.email); // 👉 email from payload
       setCurrentUser(decoded.email);
     }
 
@@ -47,7 +46,6 @@ const Interviews = () => {
       try {
         const newdata = await axios.get(`${URI}/api/user/user/${currentUser}`);
         if (newdata.data.success) {
-          console.log(newdata.data.message);
           setCurrentUserData(newdata.data.message);
         }
       } catch (error) {
@@ -65,7 +63,6 @@ const Interviews = () => {
         } else {
           setAuthorized(false)
         }
-        console.log("Admin data:", res.data);
       } catch (err) {
         setAuthorized(false);
         console.log("Error:", err.message);
@@ -104,7 +101,6 @@ const Interviews = () => {
     const fetchData = async () => {
       try {
         const newdata = await axios.get(`${URI}/api/posts/getPosts`)
-        console.log(newdata.data.message);
         setInterviewData(newdata.data.message);
       } catch (error) {
         console.log(error);
@@ -160,7 +156,6 @@ const Interviews = () => {
     if (!post) return;
 
     const isLiked = post.likes.includes(currentUser);
-    console.log(isLiked)
     const endpoint = isLiked ? `${URI}/api/posts/removeLike/${id}` : `${URI}/api/posts/addLike/${id}`;
 
     try {
@@ -168,7 +163,6 @@ const Interviews = () => {
         name: currentUser,
       });
 
-      console.log(response.data.message);
 
       // Update local state only on successful API response
       if (response.data.success) {
@@ -191,7 +185,6 @@ const Interviews = () => {
   };
 
   const handleCommentSubmit = async (postId) => {
-    console.log('comment', currentUserData.name, currentUser, comment);
 
     if (!newComment.trim()) return; // Prevent empty comments
 

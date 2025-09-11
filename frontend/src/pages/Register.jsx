@@ -28,7 +28,6 @@ const RegisterPage = () => {
 
   const handleFormSubmit = async(e) => {
     e.preventDefault();
-    console.log(formData.password,confirmPassword)
     if(formData.password !== confirmPassword){
       toast.error('Both passwords are not matching')
       setFormData({...formData,password:''})

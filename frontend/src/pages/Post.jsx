@@ -40,7 +40,6 @@ const Post = () => {
             try {
                 const newdata = await axios.get(`${URI}/api/user/user/${currentUser}`);
                 if (newdata.data.success) {
-                    console.log(newdata.data.message);
                     setCurrentUserData(newdata.data.message);
                 }
             } catch (error) {
@@ -151,11 +150,9 @@ const Post = () => {
             branch: currentUserData.branch,
         };
 
-        console.log("Submitting Post:", finalPostData);
         try {
             const newdata = await axios.post(`${URI}/api/posts/post`, finalPostData);
             if (newdata.data.success) {
-                console.log("data:", newdata.data.message);
                 setPostData({
                     companyName: "",
                     rounds: [],
