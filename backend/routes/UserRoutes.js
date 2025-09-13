@@ -17,6 +17,12 @@ router.post('/register',async (req,res)=>{
       return res.json({success: false, message:"Invalid email format" });
     }
 
+    // check if email already exists
+    const existingUser = await user.findOne({ email });
+    if (existingUser) {
+      return res.json({ success: false, message: "Email already registered" });
+    }
+
     const hashedPassword = await bcrypt.hash(password,10)
     const newuser = new user({name,email,password:hashedPassword,passoutYear,branch})
     await newuser.save()

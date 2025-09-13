@@ -16,6 +16,8 @@ const RegisterPage = () => {
     branch: '',
   });
 
+  const [loading,SetLoading] = useState(false);
+
   const [confirmPassword,setConfirmPassword] = useState('');
 
   const handleInputChange = (e) => {
@@ -36,8 +38,10 @@ const RegisterPage = () => {
     }
     // In a real application, you would send this data to an API
     try {
+      SetLoading(true);
       const newdata = await axios.post(`${URI}/api/user/register`,formData);
-
+      console.log(newdata.data)
+      
       if(!newdata.data.success){
         window.alert(newdata.data.message);
       }else{
@@ -46,6 +50,8 @@ const RegisterPage = () => {
       }
     } catch (error) {
       console.log(error)
+    }finally{
+      SetLoading(false)
     }
   };
 
@@ -150,9 +156,12 @@ const RegisterPage = () => {
 
           <button
             type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-lg text-lg font-bold text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200"
+            disabled={loading}
+            className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-lg text-lg font-bold text-white transition-colors duration-200 
+              ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-green-500 hover:bg-green-600 focus:ring-2 focus:ring-offset-2 focus:ring-green-500"}
+            `}
           >
-            Register
+            {loading ? "Registering..." : "Register"}
           </button>
         </form>
 
