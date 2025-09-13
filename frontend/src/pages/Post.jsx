@@ -67,6 +67,8 @@ const Post = () => {
         appliedOn: "On-Campus",
     });
 
+    const [loading,SetLoading] = useState(false);
+
     // Handlers for form fields
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -151,6 +153,7 @@ const Post = () => {
         };
 
         try {
+            SetLoading(true);
             const newdata = await axios.post(`${URI}/api/posts/post`, finalPostData);
             if (newdata.data.success) {
                 setPostData({
@@ -164,6 +167,9 @@ const Post = () => {
             }
         } catch (error) {
             toast.error(error.message);
+        }
+        finally{
+            SetLoading(false);
         }
     };
 
@@ -419,7 +425,10 @@ const Post = () => {
                         <div className="flex justify-center mt-8">
                             <button
                                 type="submit"
-                                className="w-full py-3 px-8 rounded-full text-lg font-bold text-white bg-green-500 hover:bg-green-600 transition-colors shadow-lg"
+                                disabled={loading}
+                                className={`w-full py-3 px-8 rounded-full text-lg font-bold text-white transition-colors duration-200 shadow-lg
+                                ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-green-500 hover:bg-green-600 focus:ring-2 focus:ring-offset-2 focus:ring-green-500"}
+                                `}
                             >
                                 Submit Experience
                             </button>
