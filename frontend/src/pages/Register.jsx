@@ -41,9 +41,9 @@ const RegisterPage = () => {
       SetLoading(true);
       const newdata = await axios.post(`${URI}/api/user/register`,formData);
       console.log(newdata.data)
-      
+
       if(!newdata.data.success){
-        window.alert(newdata.data.message);
+        toast.error(newdata.data.message);
       }else{
         toast.success('Registered Successful');
         navigate('/login');
