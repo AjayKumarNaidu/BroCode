@@ -394,7 +394,7 @@ const Interviews = () => {
         </div>
 
         <div className="w-full max-w-4xl space-y-6">
-          {filteredData.length > 0 ? (
+          {filteredData.length > 0 && (
             filteredData.map((post, index) => (
               <div key={post._id} className="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300" >
                 <div className="flex justify-between items-start mb-4" onClick={() => navigate(`/interview/${post._id}`)}>
@@ -465,17 +465,15 @@ const Interviews = () => {
                 )}
               </div>
             ))
-          ) : (
-            <div className="text-center p-8">
+          )}
+          <div className="text-center p-8">
               {hasMore && (
                 <button onClick={fetchData} disabled={loading}>
-                  {loading ? "Loading..." : <span className='bg-slate-400'>"Load More"</span>}
+                  {loading ? "Loading..." : <span className='items-center hover:bg-slate-400'>"Load More"</span>}
                 </button>
               )}
               {!hasMore && <p>No more posts</p>}
-            </div>
-          )}
-          
+          </div>
         </div>
       </main>
 
