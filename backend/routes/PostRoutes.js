@@ -21,7 +21,7 @@ router.post('/post',async (req,res)=>{
 router.get('/getPosts', async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1; // current page
-    const limit = 5; // posts per request
+    const limit = 3; // posts per request
     const skip = (page - 1) * limit;
 
     const posts = await post
