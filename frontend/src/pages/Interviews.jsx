@@ -466,16 +466,16 @@ const Interviews = () => {
               </div>
             ))
           ) : (
-            <div className="text-center p-8 text-gray-500">
-              <p>No interview experiences found for the selected filters.</p>
+            <div className="text-center p-8">
+              {hasMore && (
+                <button onClick={fetchData} disabled={loading}>
+                  {loading ? "Loading..." : <span className='bg-slate-400'>"Load More"</span>}
+                </button>
+              )}
+              {!hasMore && <p>No more posts</p>}
             </div>
           )}
-          {hasMore && (
-            <button onClick={fetchData} disabled={loading}>
-              {loading ? "Loading..." : "Load More"}
-            </button>
-          )}
-          {!hasMore && <p>No more posts</p>}
+          
         </div>
       </main>
 
