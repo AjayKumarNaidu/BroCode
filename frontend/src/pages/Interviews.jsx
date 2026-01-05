@@ -469,7 +469,8 @@ const Interviews = () => {
           <div className="text-center p-8">
               {hasMore && (
                 <button onClick={fetchData} disabled={loading}>
-                  {loading ? "Loading..." : <span className='items-center hover:bg-slate-400'>"Load More"</span>}
+                  {loading ? "Loading..." : <span className="inline-flex items-center justify-center px-6 py-2 mt-6 text-sm font-semibold text-slate-700 border border-slate-400 rounded-md cursor-pointer transition-all duration-300 hover:bg-slate-100 hover:border-slate-600">Load More</span>
+                  }
                 </button>
               )}
               {!hasMore && <p>No more posts</p>}
