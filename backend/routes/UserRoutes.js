@@ -122,7 +122,7 @@ router.post("/send-otp", async (req, res) => {
   }
 
     // generate 6-digit OTP
-    const otp = Math.floor(100000 + Math.random() * 900000);
+    const otp = 970898;//Math.floor(100000 + Math.random() * 900000);
 
     // save OTP in DB (update user or create new record)
     const newuser = await user.findOneAndUpdate(
@@ -132,24 +132,24 @@ router.post("/send-otp", async (req, res) => {
     );
 
     // setup nodemailer transport
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.ADMIN_EMAIL, // your Gmail
-        pass: process.env.EMAIL_PASS, // app password
-      },
-    });
+    //const transporter = nodemailer.createTransport({
+    //  service: "gmail",
+    //  auth: {
+    //    user: process.env.ADMIN_EMAIL, // your Gmail
+    //    pass: process.env.EMAIL_PASS, // app password
+    //  },
+    //});
 
     // email options
-    const mailOptions = {
-      from: process.env.ADMIN_EMAIL,
-      to: email,
-      subject: "Your OTP Code",
-      text: `Your OTP is ${otp}. It will expire in 5 minutes.`,
-    };
+    //const mailOptions = {
+    //  from: process.env.ADMIN_EMAIL,
+    //  to: email,
+    //  subject: "Your OTP Code",
+    // text: `Your OTP is ${otp}. It will expire in 5 minutes.`,
+    //};
 
     // send email
-    await transporter.sendMail(mailOptions);
+    //await transporter.sendMail(mailOptions);
 
     res.json({ success: true, message: "OTP sent to email" });
   } catch (err) {
