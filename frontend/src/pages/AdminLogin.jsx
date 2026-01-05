@@ -84,7 +84,7 @@ const LoginPage = () => {
           <div>
             <label htmlFor="secretKey" className="block text-sm font-medium text-gray-700">Secret Key</label>
             <input
-              type="text"
+              type="password"
               name="secretKey"
               id="secretKey"
               required
@@ -103,7 +103,7 @@ const LoginPage = () => {
           <div>
             <label htmlFor="otp" className="block text-sm font-medium text-gray-700">OTP</label>
             <input
-              type="text"
+              type="password"
               name="otp"
               id="otp"
               required
