@@ -67,10 +67,10 @@ router.get("/allowAccess", authMiddleware(["admin"]), (req, res) => {
 
 
 // Only admin can see allowFeedback page
-router.get("/allowFeedback", authMiddleware(["admin"]), (req, res) => {
+router.get("/allowFeedback", authMiddleware(["admin","user"]), (req, res) => {
   res.json({
     success: true,
-    message: "Welcome Admin! You have full access.",
+    message: "Welcome Admin and User! You have full access.",
     user: req.user,
   });
 });
