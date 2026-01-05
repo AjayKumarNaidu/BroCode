@@ -96,16 +96,39 @@ const Interviews = () => {
   const companies = ["All", ...getUniqueCompanies(interviewData)];
   const verdicts = ["All", "Selected", "Not Selected", "In Progress"];
 
+  //states for pagination
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+
   //to get all posts from backend
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const newdata = await axios.get(`${URI}/api/posts/getPosts`)
-        setInterviewData(newdata.data.message);
-      } catch (error) {
-        console.log(error);
-      }
+  const fetchData = async () => {
+    if (loading || !hasMore) return;
+
+    try {
+      setLoading(true);
+
+      const newdata = await axios.get(
+        `${URI}/api/posts/getPosts?page=${page}`
+      );
+
+      setInterviewData(prev => [
+        ...prev,
+        ...newdata.data.message
+      ]);
+
+      setHasMore(newdata.data.hasMore);
+      setPage(prev => prev + 1);
+
+      setLoading(false);
+
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
+  };
+
+  useEffect(() => {
     fetchData();
   }, [])
 
@@ -447,6 +470,12 @@ const Interviews = () => {
               <p>No interview experiences found for the selected filters.</p>
             </div>
           )}
+          {hasMore && (
+            <button onClick={fetchData} disabled={loading}>
+              {loading ? "Loading..." : "Load More"}
+            </button>
+          )}
+          {!hasMore && <p>No more posts</p>}
         </div>
       </main>
 

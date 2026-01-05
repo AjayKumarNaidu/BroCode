@@ -17,14 +17,31 @@ router.post('/post',async (req,res)=>{
 })
 
 //get all posts
-router.get('/getPosts',async(req,res)=>{
+// get posts with pagination
+router.get('/getPosts', async (req, res) => {
   try {
-    const newposts = await post.find({});
-    return res.json({success:true,message:newposts});
+    const page = parseInt(req.query.page) || 1; // current page
+    const limit = 5; // posts per request
+    const skip = (page - 1) * limit;
+
+    const posts = await post
+      .find({})
+      .skip(skip)
+      .limit(limit);
+
+    const totalPosts = await post.countDocuments();
+
+    res.json({
+      success: true,
+      message: posts,
+      hasMore: skip + posts.length < totalPosts
+    });
+
   } catch (error) {
-    return res.json({success:false,message:error.message});
+    res.json({ success: false, message: error.message });
   }
-})
+});
+
 
 //getting individual post
 router.get('/getPost/:id',async(req,res)=>{
