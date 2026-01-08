@@ -43,6 +43,16 @@ router.get('/getPosts', async (req, res) => {
 });
 
 
+//get post for admin
+router.get('/getPostsAdmin',async(req,res)=>{
+  try {
+    const newpost = await post.find({});
+    res.json({success:true,message:newpost});
+  } catch (error) {
+    return res.json({success:false,message:error.message});
+  }
+})
+
 //getting individual post
 router.get('/getPost/:id',async(req,res)=>{
   try {

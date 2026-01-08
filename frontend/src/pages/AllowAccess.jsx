@@ -83,7 +83,7 @@ function AllowAccess() {
   useEffect(()=>{
     const fetchData = async ()=>{
       try {
-        const newdata = await axios.get(`${URI}/api/posts/getPosts`)
+        const newdata = await axios.get(`${URI}/api/posts/getPostsAdmin`)
         console.log(newdata.data.message);
         setAllPosts(newdata.data.message);
       } catch (error) {
